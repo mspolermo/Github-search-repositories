@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sample</title>
+    <title>GitHub search repositories</title>
+    <base target="_blank">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
@@ -19,36 +20,18 @@
             <div class="section-search__right">
                 <h1 class="section-search__heading">GitHub search repositories</h1>
                 <form action="" class="section-search__form" id="form">
-                <input type="text" class="section-search__input" id="search" name="name" placeholder="Enter text">
-                <button class="section-search__btn" id="search-btn">Search</button>
+                    <input type="text" class="section-search__input" id="search-input" name="name" placeholder="Enter text">  
+                    <button class="section-search__btn" id="search-btn">Search</button>
+                    <span class="section-search__error section-search__error_none" id="error-block">Ошибка</span>
                 </form>
             </div>
           </div>
         </section>
         <section class="section-results">
           <div class="container section-results__container" id="results-block">
-            <div class="section-results__result">
-                <div class="section-results__left">
-                   <p class="section-results__number">0</p> 
-                   <a href="" class="section-results__rep-name">Dog-web</a>
-                </div>
-                <div class="section-results__center">
-                    <p class="section-results__language">Language: HTML</p>
-                    <p class="section-results__visibility">Visibility: public</p>
-                    <p class="section-results__project-description">Decribtion: My first web-site</p>
-                </div>
-                <div class="section-results__right">
-                    <img src="https://avatars.githubusercontent.com/u/108793771?v=4" alt="" class="section-results__avatar">
-                    <div class="section-results__owner-info">
-                        <p class="section-results__owner">Mspolermo</p>
-                        <p class="section-results__id">Id:1234243</p>
-                    </div>
-                </div>
-            </div>
           </div>
         </section>
-      </main>
-
+    </main>
     <script src="./js/main.js"></script>
 </body>
 </html>

@@ -1,14 +1,20 @@
-// `https://api.github.com/search/repositories?q={${query}{&page,per_page,sort,order}`
+// https://api.github.com/search/repositories?q={${query}{&page,per_page,sort,order}
 
 let formEl = document.querySelector('#form');
+let searchInput = document.querySelector('#search-input');
+let validationErrorMessage = document.querySelector('#error-block');
+
 
 formEl.addEventListener('submit', function (event) {
   event.preventDefault();
   let inputsValue = Object.fromEntries(new FormData(event.target));
 
-  document.querySelector('#results-block').innerHTML = '';
-  showSearchResults (inputsValue.name);
+  if (validationCheck (inputsValue.name.length) == true) {
 
+    document.querySelector('#results-block').innerHTML = '';
+    showSearchResults (inputsValue.name);
+
+  };
 });
 
 
@@ -16,12 +22,12 @@ async function showSearchResults (SearchInput) {
 
   try {
 
-    let gihubSearchResult = await getData (SearchInput);
+    let gihubSearchResult = await getData(SearchInput);
     createSumOfResultsBlock (gihubSearchResult);
     
   }
   catch {
-    console.log('ERROR');
+    createStatusMessage ('ERROR')
   }
 
 };
@@ -30,10 +36,10 @@ async function getData(SearchInput) {
 
   let response = fetch(`https://api.github.com/search/repositories?q=${SearchInput}`).then(
     successResponse => {
-      if (successResponse.status != 200) {
-        return null;
-      } else {
+      if (successResponse.ok) {
         return successResponse.json();
+      } else {
+        return null;
       }
     },
     failResponse => {
@@ -46,13 +52,18 @@ async function getData(SearchInput) {
 
 function createSumOfResultsBlock (response) {
 
-  const countResult = document.createElement('p');
-  countResult.className = 'section-results__sum-of-results';
-  countResult.innerText = `Number of search results : ${response.total_count}`
-  document.getElementById('results-block').append(countResult); 
+  if (response.total_count > 0) {
 
-  for (let i = 0; i < 10; i++) {
-    createResultBlock (i, response);
+    createStatusMessage (response.total_count);
+  
+    for (let i = 0; i < 10; i++) {
+      createResultBlock (i, response);
+    };
+
+  } else {
+
+    createStatusMessage (0);
+
   };
 
 };
@@ -124,4 +135,42 @@ function createResultBlock (i, response) {
   ownerId.className = 'section-results__id';
   ownerId.innerText = `Id:${response.items[i].owner.id}`;
   document.getElementById('owner-info-' + i).append(ownerId);
+};
+
+function createStatusMessage (data) {
+
+  const countResult = document.createElement('p');
+  countResult.className = 'section-results__status-message';
+
+  if (data > 0) {
+    countResult.innerText = `Number of search results : ${data}`;
+  }else if (data == 0) {
+    countResult.innerText = `Sorry, nothing found :(`;
+  } else {
+    countResult.innerText = `${data} - Something went wrong :(`;
+  };
+
+  document.getElementById('results-block').append(countResult); 
+};
+
+function validationCheck (symbols) {
+
+  if (symbols < 2) {
+
+    validationErrorMessage.classList.remove('section-search__error_none');
+    validationErrorMessage.innerText = 'Minimum search length is 2 symbols';
+
+    searchInput.addEventListener ('keydown', function (){
+      validationErrorMessage.classList.add('section-search__error_none');
+      validationErrorMessage.innerText = '';
+    });
+
+    return false;
+  }else {
+
+    validationErrorMessage.classList.add('section-search__error_none');
+    validationErrorMessage.innerText = '';
+
+    return true
+  };
 };
