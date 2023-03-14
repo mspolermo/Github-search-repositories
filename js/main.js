@@ -108,7 +108,11 @@ function createResultBlock (i, response) {
 
   const description =  document.createElement('p');
   description.className = 'section-results__project-description';
-  description.innerText = `Description: ${response.items[i].description}`;
+  if (response.items[i].description == null) {
+    description.innerText = `No description`;
+  }else {
+    description.innerText = `Description: ${response.items[i].description}`;
+  };
   document.getElementById('center-part-' + i).append(description);
 
   const rightPart = document.createElement('div');
