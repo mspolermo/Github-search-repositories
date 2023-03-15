@@ -136,8 +136,10 @@ body {
         text-align: center;
     }
     &__rep-name {
-        flex: 0 1 80%;
+        flex: 1 1 80%;
+        max-width: 200px;
 
+        overflow: hidden;
         color: rgb(180, 189, 200);
     }
     &__rep-name:hover {
@@ -147,16 +149,28 @@ body {
     &__center {
         flex: 0 1 60%;
         padding: 10px 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
+        
+        max-width: 600px;
+        max-height: 600px;
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: space-evenly;
         flex-wrap: wrap;
     }
     &__language {
+        max-width: 600px;
+        max-height: 600px;
+        overflow: hidden;
     }
     &__visibility {
+        max-width: 600px;
+        max-height: 600px;
+        overflow: hidden;
     }
     &__project-description {
+        max-width: 600px;
+        max-height: 550px;
+        overflow: scroll;
     }
     &__right {
         flex: 0 1 20%;
@@ -180,6 +194,9 @@ body {
     }
     &__owner {
         padding-bottom: 2px;
+        max-width: 100px;
+
+        overflow: hidden;
     }
     &__id {
         padding-left: 2px;

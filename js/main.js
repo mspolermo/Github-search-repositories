@@ -52,7 +52,7 @@ async function getData(SearchInput) {
 
 function createSumOfResultsBlock (response) {
 
-  if (response.total_count > 0) {
+  if (response.total_count >= 10) {
 
     createStatusMessage (response.total_count);
   
@@ -60,7 +60,16 @@ function createSumOfResultsBlock (response) {
       createResultBlock (i, response);
     };
 
-  } else {
+  }else if (response.total_count < 10) {
+
+    createStatusMessage (response.total_count);
+  
+    for (let i = 0; i < response.total_count ; i++) {
+      createResultBlock (i, response);
+    };
+
+
+  }else {
 
     createStatusMessage (0);
 
