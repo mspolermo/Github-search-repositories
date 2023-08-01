@@ -1,0 +1,31 @@
+{
+  "name": "github-search-repositories",
+  "version": "1.0.0",
+  "homepage": "https://mspolermo.github.io/Github-search-repositories",
+  "description": "Github search repositories using API Github # Описание Поиск репозиториев github по подстроке - Форма срабатывает по кнопке \"Search\" или по нажатию клавиши Enter - Cписок с результатами выводит только первые 10 найденных репозиториев - Поле ввода (для подстроки поиска):    - Если символов недостаточно, то выдается сообщение об ошибке # Внешний вид - В результатах поиска выводится название репозитория, искользуемый язык, видимость, описание репозитория, автар, ник и id владельца репозитория - Название по совместительству является ссылкой на соответвующий git репозиторий   - Ссылки окрываются в новой вкладке браузера - Дополнительно   - Изначально пустой список   - Если по запросу ничего не найдено, то вместо списка выводится сообщение \"Sorry, nothing found\"   - В случае возникновение ошибок при запросе к API, вместо списка выводится сообщение \"ERROR - Something went wrong\"",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode=development",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --open"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.8.1",
+    "file-loader": "^6.2.0",
+    "gh-pages": "^5.0.0",
+    "html-webpack-plugin": "^5.5.3",
+    "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "dependencies": {
+    "sass": "^1.64.2"
+  }
+}

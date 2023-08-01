@@ -17,7 +17,6 @@ formEl.addEventListener('submit', function (event) {
   };
 });
 
-
 async function showSearchResults (SearchInput) {
 
   try {
